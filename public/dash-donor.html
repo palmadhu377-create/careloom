@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <script>
+        function setEmail(){
+          document.getElementById("InputEmailMed").value=localStorage.getItem("activeuser")
+          document.getElementById("InputEmailSet").value=localStorage.getItem("activeuser")
+          document.getElementById("InputEmailEqp").value=localStorage.getItem("activeuser")
+        }
+        
+      </script>
+      <script>
+        function doLogout() {
+            localStorage.removeItem("activeuser");
+            location.href = "/";
+        }
+
+    </script>
+     
+    <script>
+        let myModule = angular.module("myModuleKuch", [])
+        let myController = myModule.controller("myControllerKuch", function ($scope, $http) {
+            $scope.doShowMedicines = function (email) {
+                $scope.email=localStorage.getItem("activeuser")
+                let url = "/fetch-medicine?emailidKuch=" + $scope.email;
+                $http.get(url).then(function (resp) {
+                    $scope.jsonArray = resp.data;
+                }, function (err) {
+                    alert(err);
+                });
+            }
+            // delete
+
+            $scope.doDeleteReq = function (ridd) {
+                alert();
+                let url = "/do-deletereq?ridkuch=" + ridd;
+                $http.get(url).then(function (resp) {
+                    alert(JSON.stringify(resp.data))
+                    $scope.doShowMedicines();
+
+                }, function (err) {
+                    alert(err);
+                });
+            }
+            //===update======
+            $scope.doUpdatePass = function (email) {
+                $scope.email=localStorage.getItem("activeuser")
+                let url = "/update-pass?emailidKuch=" + $scope.email + "&passOld=" + $scope.pass + "&passNew=" + $scope.passNew;
+                $http.get(url).then(function (resp) {
+                    alert(resp.data);
+                    $scope.jsonArray = resp.data;
+                }, function (err) {
+                    alert(err);
+                });
+            }
+            // fetch equipment
+            $scope.doShowEquipments = function (email) {
+                $scope.email=localStorage.getItem("activeuser")
+                let url = "/fetch-equipment?emailidKuch=" + $scope.email;
+                $http.get(url).then(function (resp) {
+                    $scope.jsonArray = resp.data;
+                }, function (err) {
+                    alert(err);
+                });
+            }
+
+            //equipment delete
+            $scope.doDeleteeqi = function (ridd) {
+                alert();
+                let url = "/do-deleteeqi?ridkuch=" + ridd;
+                $http.get(url).then(function (resp) {
+                    alert(JSON.stringify(resp.data))
+                    $scope.doShowMedicines();
+
+                }, function (err) {
+                    alert(err);
+                });
+            }
+
+        })
+
+    </script>
+
+    </script>
+</head>
+
+<body ng-app="myModuleKuch" ng-controller="myControllerKuch" onload="setEmail()">
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" >
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="./pics2/CARELOOM.png" alt="Logo" style="width:40px; height:40px;" class="me-2">
+            </a>
+            <a class="navbar-brand" href="#">CareLoom☘️</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <div class="collapse navbar-collapse " id="navbarNavAl Markup">
+                    <div class="navbar-nav ms-auto" style="font-size: 20px; ">
+                        <button class="btn btn-outline-danger" onclick="doLogout()" id="btnLogOut">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- cards -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card  h-100 text-center shadow" style="width: 18rem;">
+                    <img src="./pics2/starry-shirt-girl-cartoon-avatar-vector-61679454.avif"
+                        style="width:100px; height:100px; margin:20px auto 10px; object-fit:cover; border-radius:50%;"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Donor Profile</h5>
+                        <p class="card-text"></p>
+                        <a href="/donorprofile" class="btn btn-primary">Profile</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card  h-100 text-center shadow" style="width: 18rem;">
+                    <img src="./pics2/360_F_276803150_yUZGcTLjJErZdmLw0GhDzARQY91S6yrv.jpg"
+                        style="width:100px; height:100px; margin:20px auto 10px; object-fit:cover; border-radius:50%;"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Avail Medicine</h5>
+                        <p class="card-text"></p>
+                        <a href="/availmed" class="btn btn-primary">AvailMed</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card  h-100 text-center shadow" style="width: 18rem;">
+                    <img src="./pics2/medi.jpg"
+                        style="width:100px; height:100px; margin:20px auto 10px; object-fit:cover; border-radius:50%;"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Avail Equipment</h5>
+                        <p class="card-text"></p>
+                        <a href="/availEquip" class="btn btn-primary">AvailEqp</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card h-100 text-center shadow" style="width: 18rem;">
+                    <img src="./pics2/istockphoto-1321350839-612x612.jpg"
+                        style="width:100px; height:100px; margin:20px auto 10px; object-fit:cover; border-radius:50%;"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Medicine Manager</h5>
+                        <p class="card-text"></p>
+                        <a href="" data-bs-toggle="modal" data-bs-target="#medModal" class="btn btn-primary">Med
+                            Manager</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <div class="card  h-100 text-center shadow" style="width: 18rem;">
+                    <img src="./pics2/A Quick Checklist of Medical Equipment for Your Primary Care Practice.webp"
+                        style="width:100px; height:100px; margin:20px auto 10px; object-fit:cover; border-radius:50%;"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Equipment Manager</h5>
+                        <p class="card-text"></p>
+                        <a href="" data-bs-toggle="modal" data-bs-target="#eqpModal" class="btn btn-primary">Eqp Manager</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card  h-100 text-center shadow" style="width: 18rem;">
+                    <img src="./pics2/unnamed.png"
+                        style="width:100px; height:100px; margin:20px auto 10px; object-fit:cover; border-radius:50%;"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Settings</h5>
+                        <p class="card-text"></p>
+                        <a href="" data-bs-toggle="modal" data-bs-target="#settingModal"
+                            class="btn btn-primary">Settings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal medicine manager -->
+
+    <div class="modal fade" id="medModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Manage Medicines</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <form>
+
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" ng-model="email" id="InputEmailMed"
+                                aria-describedby="emailHelp" readonly>
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <!-- table for fetch medicine -->
+                        <center>
+                            <input type="button" class="btn btn-outline-primary" ng-click="doShowMedicines();" value="Fetch all Medicines">
+                            <table width="600" class="table table-striped-columns w-75 mt-5" border="1">
+                                <thead>
+                                    <tr>
+
+                                        <th scope="col">Medicine Name</th>
+                                        <th scope="col">Expire Date</th>
+                                        <th scope="col">Packing Type </th>
+                                        <th scope="col">Quantity </th>
+                                        <th scope="col">Delete </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="obj in jsonArray">
+                                        <td>{{obj.medname}}</td>
+                                        <td>{{obj.expdate}}</td>
+                                        <td>{{obj.packing}}</td>
+                                        <td>{{obj.qty}}</td>
+                                        </td>
+
+                                        <td align="center">
+                                            <a href="#" class="btn btn-outline-danger"
+                                                ng-click="doDeleteReq(obj.rid);">UNLIST</a>
+                                        </td>
+
+
+
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </center>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- setting modal -->
+    <div class="modal fade" id="settingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Manage Equipments</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" ng-model="email" class="form-control" id="InputEmailSet"
+                                aria-describedby="emailHelp" readonly>
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Fill Current Password</label>
+                            <input type="password" ng-model="pass" class="form-control" id="InputPass">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Fill New Password</label>
+                            <input type="password" ng-model="passNew" class="form-control" id="InputPassNew">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="doUpdatePass()" class="btn btn-primary">Update Password</button>
+                </div>
+            </div>
+        </div>
+    </div>
+ <!-- modal equipment manager -->
+
+ <div class="modal fade" id="eqpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Manage Medicines</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+                <form>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" ng-model="email" id="InputEmailEqp"
+                            aria-describedby="emailHelp" readonly>
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <!-- table for fetch equipment -->
+                    <center>
+                        <input type="button" class="btn btn-outline-primary" ng-click="doShowEquipments();" value="Fetch all Equipments">
+                        <table width="600" class="table table-striped-columns w-75 mt-5" border="1">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col">Equipment Name</th>
+                                    <th scope="col">Condition</th>
+                                    <th scope="col">Type of Equipment </th>
+                                    <th scope="col">Amount </th>
+                                    <th scope="col">Delete </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="obj in jsonArray">
+                                    <td>{{obj.equipment}}</td>
+                                    <td>{{obj.conditions}}</td>
+                                    <td>{{obj.type}}</td>
+                                    <td>{{obj.amount}}</td>
+                                    </td>
+
+                                    <td align="center">
+                                        <a href="#" class="btn btn-outline-danger"
+                                            ng-click="doDeleteeqi(obj.rid);">UNLIST</a>
+                                    </td>
+
+
+
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </center>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

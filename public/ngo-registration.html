@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <script>
+        function doShowPrev(fileCtrl,prev){
+            const file=fileCtrl.files[0];
+            if(file){
+                prev.src=URL.createObjectURL(file);
+            }
+        }
+       
+    </script>
+     <script>
+      function setEmail(){
+        document.getElementById("inputEmail").value=localStorage.getItem("activeuser")
+      }
+      
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+  <body  onload="setEmail()">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" >
+      <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="./pics2/CARELOOM.png" alt="Logo" style="width:40px; height:40px;" class="me-2">
+      </a>
+          <a class="navbar-brand" href="#">CareLoom☘️</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  
+             
+          </div>
+      </div>
+  </nav>
+     
+    <div class="container border">
+        <div class="row">
+          <div class="col-md-12 bg-primary text-white text-center">
+            NGO Registration
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 border">
+              <form enctype="multipart/form-data"  method="post">
+                <center>
+                  <div class="text-center col-md-6 mt-4">
+                    <input type="file" name="regproof"  onchange="doShowPrev(this,prevregproof)">
+                    <br>
+                    <img src="" id="prevregproof"  name="prevregproof" class="border rounded shadow mt-2" width="100" height="100">
+                    <br>
+                    Reg.Proof:
+                  </div>
+                </center>
+            </div>
+
+            <div class="col-md-8">
+                <div class="row mt-3">
+                  <div class="col-md-10">
+                    <label for="inputEmail4" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" name="inputEmail" readonly>
+                  </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                      <label for="inputngoname" class="form-label">NGO Name</label>
+                      <input type="text" class="form-control" id="inputNgoName" name="inputNgoName">
+                    </div>
+                    <div class="col-md-3">
+                      <label for="inputregoff" class="form-label">Reg.Office</label>
+                      <input type="text" class="form-control" id="inputRegOff" name="inputRegOff">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputcity" class="form-label">City</label>
+                      <input type="text" class="form-control" id="inputCity" name="inputCity">
+                    </div>
+
+
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                      <label for="inputweb" class="form-label">Website </label>
+                      <input type="text" class="form-control" id="inputWeb" name="inputWeb">
+                    </div>
+                    <div class="col-md-3">
+                      <label for="inputconno" class="form-label">contact number</label>
+                      <input type="text" class="form-control" id="inputConNo" name="inputConNo">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="inputsince" class="form-label">Since</label>
+                      <input type="text" class="form-control" id="inputSince" name="inputSince">
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                          <label for="inputchair" class="form-label">Chair Person </label>
+                          <input type="text" class="form-control" id="inputChair" name="inputChair">
+                        </div>
+                        <div class="col-md-3">
+                          <label for="inputwork" class="form-label">NGO Profile/Works </label>
+                          <input type="text" class="form-control" id="inputWork" name="inputWork">
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                              <label for="inputregno" class="form-label">Registration Number  </label>
+                              <input type="text" class="form-control" id="inputRegNo" name="inputRegNo">
+                            </div>
+
+                            <div class="row mt-5">
+                                <div class="col-md-3">
+                                  <center> <button type="submit" formaction="/ngo-data" class="btn btn-outline-primary" id="btnreg"
+                                      name="btnreg">Register Now</button></center>
+                                </div>
+                    
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+          
+            </div>
+
+      
+
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  </body>
+</html>
